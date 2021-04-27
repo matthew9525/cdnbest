@@ -1,0 +1,32 @@
+＃ / bin / sh
+导出CDNBEST_VERSION = “ 4.6.4 ”
+出口KANGLE_VERSION = “ 3.5.21.16 ”
+
+操作系统= “ 6 ”
+如果[ -f / usr / bin / systemctl] ;  然后
+        操作系统= “ 7 ”
+        如果[ -f / usr / bin / dnf] ;  然后
+                操作系统= “ 8 ”
+        是
+是
+如果 测试 `拱` ！= “ x86_64 ” ;  然后
+	echo  “仅支持arch x86_64 ... ”
+	1号出口
+是
+出口ARCH = “ $ OS -x64 ”
+出口DOWNLOAD_PREFIX = “” http://github.itzmx.com/1265578519/cdnbest/main/cdnbest “
+如果 ！ 测试 $ 1  ;  然后
+     回声 “错误：请输入cdnbest uid ”
+     1号出口
+是
+出口CB_UID = $ 1
+cd / tmp /
+wget的--no检查证书$ DOWNLOAD_PREFIX / cdnbest- $ CDNBEST_VERSION - $ ARCH名为.tar.gz -O cdnbest.tar.gz
+ret = $？
+如果[ $ ret  ！= 0] ;  然后
+	回显 “无法下载文件”
+	退出 $ ret
+是
+tar xzf cdnbest.tar.gz
+cd cdnbest
+./shell/install.sh $ CB_UID
